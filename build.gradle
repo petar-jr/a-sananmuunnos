@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'org.json', name: 'json', version: '20200518'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -27,4 +28,7 @@ bootBuildImage {
 
 test {
 	useJUnitPlatform()
+	testLogging {
+		events "failed"
+	}
 }
