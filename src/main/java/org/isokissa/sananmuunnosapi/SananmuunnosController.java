@@ -14,9 +14,8 @@ class SananmuunnosController {
   SananmuunnosController() {
   }
 
-  @PostMapping("/test")
-  String randomEntry(@RequestBody String string) {
-      System.out.println("petar evo me ovde, string=" + string);
-    return "petar";
+  @PostMapping("/sananmuunnos")
+  String randomEntry(@RequestBody String words) {
+    return "petar dobio reci= " + words;
   }
 }
