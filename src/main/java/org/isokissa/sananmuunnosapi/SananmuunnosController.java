@@ -4,6 +4,7 @@ package org.isokissa.sananmuunnosapi;
 import org.isokissa.sananmuunnos.SananmuunnosService;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +17,13 @@ class SananmuunnosController {
   SananmuunnosController() {
   }
 
+  @GetMapping("/status")
+  String status() {
+    return "OK";
+  }
+
   @PostMapping("/sananmuunnos")
-  String randomEntry(@RequestBody String words) {
+  String sananmuunnos(@RequestBody String words) {
     String trimmedWords = words.trim();
     if(trimmedWords.charAt(0) != '"' || trimmedWords.charAt(trimmedWords.length() - 1) != '"') {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid input, expecting a single string");
