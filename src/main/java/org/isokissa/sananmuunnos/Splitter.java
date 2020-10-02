@@ -27,22 +27,39 @@ class Splitter {
         return result;
     }
 
+    private enum State {START, VOWEL_START, REST};
+
+    private static boolean isVowel(char c) {
+        final String vowels = "aeiouyåöä";
+        return vowels.indexOf(toLowerCase(c)) != -1;
+    }
+
     public static WordParts splitWord(String word) {
         if (word.isEmpty()) {
             return new WordParts("", "");
         }
-        final String vowels = "aeiouyåöä";
         StringBuilder beginning = new StringBuilder();
-        beginning.append(word.charAt(0));
         StringBuilder rest = new StringBuilder();
-        boolean inTheBeginning = true;
-        for (int i = 1; i < word.length(); i++) {
+        State state = State.START; 
+        for (int i = 0; i < word.length(); i++) {
             char c = word.charAt(i);
-            if (inTheBeginning && vowels.indexOf(toLowerCase(c)) != -1) {
-                beginning.append(c);
-            } else {
-                rest.append(c);
-                inTheBeginning = false;
+            switch (state) {
+                case START: 
+                    if (isVowel(c)) {
+                        state = State.VOWEL_START;
+                    }
+                    beginning.append(c);
+                    break;
+                case VOWEL_START:
+                    if (isVowel(c)) {
+                        beginning.append(c);
+                    } else {
+                        state = State.REST; 
+                        rest.append(c);
+                    }
+                    break; 
+                default: 
+                    rest.append(c);
             }
         }
         return new WordParts(beginning.toString(), rest.toString());
