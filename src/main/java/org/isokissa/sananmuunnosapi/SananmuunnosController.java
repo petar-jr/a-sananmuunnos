@@ -4,6 +4,7 @@ package org.isokissa.sananmuunnosapi;
 import org.isokissa.sananmuunnos.SananmuunnosService;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,13 +23,15 @@ class SananmuunnosController {
     return "OK";
   }
 
-  @PostMapping("/sananmuunnos")
-  String sananmuunnos(@RequestBody String words) {
-    String trimmedWords = words.trim();
-    if(trimmedWords.charAt(0) != '"' || trimmedWords.charAt(trimmedWords.length() - 1) != '"') {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid input, expecting a single string");
-    }
-    String result = SananmuunnosService.muunna(trimmedWords.substring(1, trimmedWords.length() -1));
+  @PostMapping(path = "/sananmuunnos", 
+               consumes = MediaType.APPLICATION_JSON_VALUE, 
+               produces = MediaType.APPLICATION_JSON_VALUE)
+  String sananmuunnos(@RequestBody char[] body) {
+    StringBuilder words = new StringBuilder();
+    words.append(body);
+    System.out.println("petar original =" + words);
+    String result = SananmuunnosService.muunna(words.toString());
+    System.out.println("petar result =" + result);
     return JSONObject.quote(result);
   }
 }
