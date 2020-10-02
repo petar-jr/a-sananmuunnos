@@ -45,7 +45,7 @@ class SplitterTest {
         checkTheBeginningAndRest("bac", "ba", "c");
         checkTheBeginningAndRest("baa", "baa", "");
         checkTheBeginningAndRest("baaca", "baa", "ca");
-        checkTheBeginningAndRest("!baaca", "!", "baaca");
+        checkTheBeginningAndRest("!baaca", "!baa", "ca");
         checkTheBeginningAndRest("ba'aca", "ba", "'aca");
     }
 

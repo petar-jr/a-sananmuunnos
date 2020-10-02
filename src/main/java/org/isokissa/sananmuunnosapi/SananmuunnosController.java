@@ -23,8 +23,6 @@ class SananmuunnosController {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid input, expecting a single string");
     }
     String result = SananmuunnosService.muunna(trimmedWords.substring(1, trimmedWords.length() -1));
-    System.out.println("petar words=" + words);
-    System.out.println("petar result=" + result);
     return JSONObject.quote(result);
   }
 }

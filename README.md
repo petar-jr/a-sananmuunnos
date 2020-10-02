@@ -27,3 +27,20 @@ To run the image:
 For example, if the service is running on localhost:8088:
 
     curl -H "Content-Type: application/json" -X POST -d 'outget "input"' http://localhost:8088/sananmuunnos
+
+## Implementation details
+
+### "Tokens"
+
+Input text is firstly split into "tokens", that are either words or spaces. 
+
+### Finite State machine to split words
+
+The state transition table is used to split the word token into its "beginning" 
+and the "rest" (B - add to "beginning", R - add to "rest"):
+
+| State \ Input | **vowel** | **non-vowel** |
+| -------------|:-------------:| :--------:|
+| **START**         | VOWEL_START, B | START, B |
+| **VOWEL_START**   | VOWEL_START, B | REST, R |
+| **REST**         | REST, R | REST, R |

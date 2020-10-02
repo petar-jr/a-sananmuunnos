@@ -20,8 +20,12 @@ class SananmuunnosServiceTest {
         assertSananmuunnos("tata mama", "mata tama");
         assertSananmuunnos("   tata     mama ", "   mata     tama ");
         assertSananmuunnos("  tata mama deka  ", "  mata tama deka  ");
-        assertSananmuunnos("tata mama caca   baba ", "mata tama baca   caba ");
-        assertSananmuunnos("tata mama caca   baba  abc", "mata tama baca   caba  abc");
+        assertSananmuunnos("tata mama caca   baba ", 
+                           "mata tama baca   caba ");
+        assertSananmuunnos("tata mama caca   baba  abc", 
+                           "mata tama baca   caba  abc");
+        assertSananmuunnos("  tata mama  brat   sestra  abc", 
+                           "  mata tama  set   brastra  abc");
     }
 
     private void assertSananmuunnos(String input, String expectedOutput) {
