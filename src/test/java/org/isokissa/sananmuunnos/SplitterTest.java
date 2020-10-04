@@ -23,18 +23,17 @@ class SplitterTest {
     @Test
     public void splitsStringWithTwoWords() {
         List<String> result = Splitter.splitToTokens("abc  ");
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0)).isEqualTo("abc");
-        assertThat(result.get(1)).isEqualTo("  ");
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0)).isEqualTo("abc  ");
     }
 
     @Test
     public void splitsStringWithTwoWordsStartingWithSpaces() {
-        List<String> result = Splitter.splitToTokens("    abc  ");
+        List<String> result = Splitter.splitToTokens("    abc  def      ");
         assertThat(result.size()).isEqualTo(3);
         assertThat(result.get(0)).isEqualTo("    ");
-        assertThat(result.get(1)).isEqualTo("abc");
-        assertThat(result.get(2)).isEqualTo("  ");
+        assertThat(result.get(1)).isEqualTo("abc  ");
+        assertThat(result.get(2)).isEqualTo("def      ");
     }
 
     @Test
@@ -45,7 +44,7 @@ class SplitterTest {
         checkTheBeginningAndRest("bac", "ba", "c");
         checkTheBeginningAndRest("baa", "baa", "");
         checkTheBeginningAndRest("baaca", "baa", "ca");
-        checkTheBeginningAndRest("!baaca", "!baa", "ca");
+        checkTheBeginningAndRest("!baaca  ", "!baa", "ca  ");
         checkTheBeginningAndRest("ba'aca", "ba", "'aca");
     }
 
