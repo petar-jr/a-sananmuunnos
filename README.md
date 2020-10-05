@@ -32,8 +32,8 @@ For example, if the service is running on localhost:8088:
 
 ### "Tokens"
 
-Input text is firstly split into "tokens", that have form <non-spaces><spaces>. For first
-token, the <non-spaces> can be empty, in case there are leading spaces in the beginning of 
+Input text is firstly split into "tokens", that have form `<non-spaces><spaces>`. For first
+token, the `<non-spaces>` can be empty, when there are leading spaces in the beginning of 
 input string.  
 
 ### Finite State machine to split words
