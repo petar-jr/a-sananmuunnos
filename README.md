@@ -26,7 +26,7 @@ To run the image:
 
 For example, if the service is running on localhost:8088:
 
-    curl -H "Content-Type: application/json" -X POST -d 'outget "input"' http://localhost:8088/sananmuunnos
+    curl -H "Content-Type: application/json" -X POST -d '   mama tata    ' http://localhost:8088/sananmuunnos
 
 ## Implementation details
 
