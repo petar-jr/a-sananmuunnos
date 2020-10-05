@@ -3,6 +3,7 @@ package org.isokissa.sananmuunnos;
 import java.util.List; 
 import java.util.ArrayList;
 
+import static java.lang.Character.isWhitespace;
 import static java.lang.Character.toLowerCase;
 
 class Splitter {
@@ -13,13 +14,19 @@ class Splitter {
             return result; 
         } 
         StringBuilder current = new StringBuilder(input.substring(0, 1));
-        boolean isOnSpace = input.charAt(0) == ' ';
+        boolean isOnSpace = isWhitespace(input.charAt(0));
         for (int i = 1; i < input.length(); i++) {
             char c = input.charAt(i);
-            if ((isOnSpace && c != ' ') || (!isOnSpace && c == ' ')) {
-                result.add(current.toString());
-                current.delete(0, current.length());
-                isOnSpace = !isOnSpace;
+            if (isWhitespace(c)) {
+                if (!isOnSpace) {
+                    isOnSpace = true;
+                }
+            } else {
+                if (isOnSpace) {
+                    result.add(current.toString());
+                    current.delete(0, current.length());
+                    isOnSpace = false;
+                }
             }
             current.append(c);
         }
